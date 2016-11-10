@@ -43,8 +43,4 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\CXY\AppData\Roaming\Subversion</configuration>
-    <option name="runUnderTerminal" value="true" />
-  </component>
 </project>

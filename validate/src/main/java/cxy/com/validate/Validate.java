@@ -192,6 +192,9 @@ public class Validate {
                             field.isAnnotationPresent(MinLength.class) ||
                             field.isAnnotationPresent(Index.class)
                             ) {
+                        if (!field.getType().getName().equals("annotation must be on the EditText")) {
+                            throw new RuntimeException();
+                        }
                         field.setAccessible(true);
 
                         List<AttrBean> editTextMap = activitys.get(activity);
