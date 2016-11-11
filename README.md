@@ -58,3 +58,22 @@ onDestroy解注册
 |@RE| 正则验证|msg: 提示信息<br>re:正则表达式|
 |@MinLength|最低长度|msg: 提示信息<br>length:最低长度(包含)|
 |@MaxLength|最大长度|msg: 提示信息<br>length:最大长度(包含)|
+
+
+
+
+
+## 使用
+root build.gradle
+```
+allprojects {
+  repositories {
+    ...
+    maven { url "https://jitpack.io" }
+  }
+}
+```
+app build.gradle
+```
+  compile 'com.github.LongMaoC:validateui:v1.0'
+```
