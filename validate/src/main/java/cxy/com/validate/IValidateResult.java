@@ -9,7 +9,7 @@ import android.widget.EditText;
 public interface IValidateResult {
     void onValidateSuccess();
 
-    void onValidateError(EditText editText, String msg);
+    void onValidateError( String msg,EditText editText);
 
     Animation onValidateErrorAnno();
 }

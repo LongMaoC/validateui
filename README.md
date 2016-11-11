@@ -42,6 +42,9 @@ onDestroy解注册
 ```
  Validate.unreg(this);
 ```
+
+以下请参照app->MainActivity.java . 更用以理解
+
 | 注解 |例子|备注|
 |:--:|:--|:--|
 |@NotNull<br>非空验证|@NotNull(msg = "不能为空！")<br>EditText etNotnull;|msg: 提示信息|

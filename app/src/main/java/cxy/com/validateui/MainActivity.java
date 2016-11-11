@@ -1,28 +1,26 @@
 package cxy.com.validateui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import cxy.com.validate.IValidateResult;
 import cxy.com.validate.Validate;
 import cxy.com.validate.ValidateAnimation;
+import cxy.com.validate.annotation.MaxLength;
+import cxy.com.validate.annotation.MinLength;
 import cxy.com.validate.annotation.NotNull;
 import cxy.com.validate.annotation.RE;
 import cxy.com.validate.annotation.Repeat;
 import cxy.com.validate.annotation.RepeatLast;
 
 
-//annotation
 public class MainActivity extends AppCompatActivity implements IValidateResult {
 
-
-    Button button;
 
     @NotNull(msg = "不能为空！")
     private EditText etNotnull;
@@ -45,9 +43,18 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
     @RepeatLast(flag = "BB", msg = "三次密码不同")
     private EditText etPwFlag3;
 
+
     @NotNull(msg = "请填写邮箱")
     @RE(re = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}", msg = "格式错误！")
-    private EditText etRe;
+    EditText etRe;
+
+    @MaxLength(length = 3, msg = "超出最大长度")
+    EditText et_max;
+    @MinLength(length = 3, msg = "错误，字符数目不够")
+    EditText et_min;
+
+
+
 
     private void init() {
         etNotnull = (EditText) findViewById(R.id.et_notnull);
@@ -56,10 +63,20 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
         etPwFlag1 = (EditText) findViewById(R.id.et_pw_flag1);
         etPwFlag2 = (EditText) findViewById(R.id.et_pw_flag2);
         etPwFlag3 = (EditText) findViewById(R.id.et_pw_flag3);
-
-
         etRe = (EditText) findViewById(R.id.et_re);
 
+
+        et_max = (EditText) findViewById(R.id.et_max);
+        et_min = (EditText) findViewById(R.id.et_min);
+
+
+//        etNotnull.setText("notnull");
+//        etPw1.setText("etPw1");
+//        etPw2.setText("etPw1");
+//        etPwFlag1.setText("etPwFlag");
+//        etPwFlag2.setText("etPwFlag");
+//        etPwFlag3.setText("etPwFlag");
+//        etRe.setText("129100149@qq.com");
     }
 
     long startTime;
@@ -77,7 +94,14 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
             @Override
             public void onClick(View view) {
                 startTime = System.currentTimeMillis();
-                Validate.check(MainActivity.this,MainActivity.this);
+                Validate.check(MainActivity.this, MainActivity.this);
+            }
+        });
+
+        findViewById(R.id.btn_nextAct).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
             }
         });
     }
@@ -88,14 +112,13 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
         Validate.unreg(this);
     }
 
-
     @Override
     public void onValidateSuccess() {
         Toast.makeText(this, "验证成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onValidateError(EditText editText, String msg) {
+    public void onValidateError( String msg,EditText editText) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 

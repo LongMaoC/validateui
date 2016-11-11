@@ -2,103 +2,133 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="vertical"
-           android:layout_height="match_parent">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="#ECECEC"
-               android:gravity="center_horizontal"
-               android:text="非空验证" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-           <EditText
-               android:id="@+id/et_notnull"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:layout_marginTop="5dp"
-               android:hint="" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="非空验证" />
 
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="#ECECEC"
-               android:gravity="center_horizontal"
-               android:text="两次密码验证" />
-           <EditText
-               android:id="@+id/et_pw1"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:hint="密码" />
+            <EditText
+                android:id="@+id/et_notnull"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:hint="" />
 
-           <EditText
-               android:id="@+id/et_pw2"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:layout_marginTop="5dp"
-               android:hint="确认密码" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="两次密码验证" />
+
+            <EditText
+                android:id="@+id/et_pw1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="密码" />
+
+            <EditText
+                android:id="@+id/et_pw2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:hint="确认密码" />
 
 
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="#ECECEC"
-               android:gravity="center_horizontal"
-               android:text="多次密码验证" />
-           <EditText
-               android:id="@+id/et_pw_flag1"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:hint="多次密码->第一次确认密码" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="多次密码验证" />
 
-           <EditText
-               android:id="@+id/et_pw_flag2"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:layout_marginTop="5dp"
-               android:hint="多次密码->第二次确认密码" />
+            <EditText
+                android:id="@+id/et_pw_flag1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="多次密码->第一次确认密码" />
 
-           <EditText
-               android:id="@+id/et_pw_flag3"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:layout_marginTop="5dp"
-               android:hint="多次密码->第三次确认密码" />
+            <EditText
+                android:id="@+id/et_pw_flag2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:hint="多次密码->第二次确认密码" />
 
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="#ECECEC"
-               android:gravity="center_horizontal"
-               android:text="正则" />
-           <EditText
-               android:id="@+id/et_re"
-               android:layout_width="300dp"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:hint="正则" />
-       </LinearLayout>
+            <EditText
+                android:id="@+id/et_pw_flag3"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:hint="多次密码->第三次确认密码" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="正则验证" />
+
+            <EditText
+                android:id="@+id/et_re"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="正则" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="长度验证" />
+            <EditText
+                android:id="@+id/et_max"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="最大长度三的验证" />
+            <EditText
+                android:id="@+id/et_min"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="最小长度三的验证" />
+
+
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="验证" />
+        <Button
+            android:id="@+id/btn_nextAct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="next" />
     </LinearLayout>
 
 </ScrollView>
