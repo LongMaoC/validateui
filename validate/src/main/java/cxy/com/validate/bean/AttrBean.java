@@ -1,5 +1,7 @@
 package cxy.com.validate.bean;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,4 +13,13 @@ public class AttrBean {
     public Integer index ;
     public String name ;
     public LinkedList<Basebean> annos ;
+
+    @Override
+    public String toString() {
+        return "AttrBean{" +
+                "index=" + index +
+                ", name='" + name + '\'' +
+                ", annos=" + annos +
+                '}';
+    }
 }

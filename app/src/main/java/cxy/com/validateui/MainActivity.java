@@ -11,6 +11,7 @@ import android.widget.Toast;
 import cxy.com.validate.IValidateResult;
 import cxy.com.validate.Validate;
 import cxy.com.validate.ValidateAnimation;
+import cxy.com.validate.annotation.Index;
 import cxy.com.validate.annotation.MaxLength;
 import cxy.com.validate.annotation.MinLength;
 import cxy.com.validate.annotation.NotNull;
@@ -21,39 +22,44 @@ import cxy.com.validate.annotation.RepeatLast;
 
 public class MainActivity extends AppCompatActivity implements IValidateResult {
 
-
+    @Index(1)
     @NotNull(msg = "不能为空！")
     private EditText etNotnull;
 
+    @Index(4)
     @NotNull(msg = "两次密码验证->密码一不为能空！")
     @Repeat(flag = "AA")
     private EditText etPw1;
 
+    @Index(5)
     @NotNull(msg = "两次密码验证->密码二不为能空！")
     @RepeatLast(flag = "AA", msg = "两次密码不一致！！！")
     private EditText etPw2;
 
+    @Index(6)
     @NotNull(msg = "多次密码验证->密码一不为能空！")
     @Repeat(flag = "BB")
     private EditText etPwFlag1;
+    @Index(7)
     @NotNull(msg = "多次密码验证->密码二不为能空！")
     @Repeat(flag = "BB")
     private EditText etPwFlag2;
+    @Index(8)
     @NotNull(msg = "多次密码验证->密码三不为能空！")
     @RepeatLast(flag = "BB", msg = "三次密码不同")
     private EditText etPwFlag3;
 
-
+    @Index(9)
     @NotNull(msg = "请填写邮箱")
     @RE(re = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}", msg = "格式错误！")
     EditText etRe;
 
+    @Index(2)
     @MaxLength(length = 3, msg = "超出最大长度")
     EditText et_max;
+    @Index(3)
     @MinLength(length = 3, msg = "错误，字符数目不够")
     EditText et_min;
-
-
 
 
     private void init() {
@@ -70,13 +76,13 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
         et_min = (EditText) findViewById(R.id.et_min);
 
 
-//        etNotnull.setText("notnull");
-//        etPw1.setText("etPw1");
-//        etPw2.setText("etPw1");
-//        etPwFlag1.setText("etPwFlag");
-//        etPwFlag2.setText("etPwFlag");
-//        etPwFlag3.setText("etPwFlag");
-//        etRe.setText("129100149@qq.com");
+        etNotnull.setText("notnull");
+        etPw1.setText("etPw1");
+        etPw2.setText("etPw1");
+        etPwFlag1.setText("etPwFlag");
+        etPwFlag2.setText("etPwFlag");
+        etPwFlag3.setText("etPwFlag");
+        etRe.setText("129100149@qq.com");
     }
 
     long startTime;
@@ -98,12 +104,7 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
             }
         });
 
-        findViewById(R.id.btn_nextAct).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Main2Activity.class));
-            }
-        });
+
     }
 
     @Override
@@ -118,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
     }
 
     @Override
-    public void onValidateError( String msg,EditText editText) {
+    public void onValidateError(String msg, EditText editText) {
+        editText.setFocusable(true);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 

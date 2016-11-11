@@ -49,7 +49,7 @@ public class ValidateCore {
 
 
     public static boolean re(REBean bean, IValidateResult validateResult) {
-        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add @NotNull ", validateResult)) {
+        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
 
@@ -65,14 +65,14 @@ public class ValidateCore {
     }
 
     public static boolean repeat1(RepeatBean bean, IValidateResult validateResult) {
-        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add @NotNull ", validateResult)) {
+        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
         return false;
     }
 
     public static boolean repeat2(RepeatBean repeatLastbean, List<RepeatBean> repeatBeen, IValidateResult validateResult) {
-        if (notNull(repeatLastbean.editText, "EditText content is null or \"\" ,  You can add @NotNull ", validateResult)) {
+        if (notNull(repeatLastbean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
 
@@ -107,7 +107,7 @@ public class ValidateCore {
 
     public static boolean max(LengthBean bean, IValidateResult validateResult) {
         Log.e("TAG", "max" + bean.editText.getText().toString().length());
-        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add @NotNull ", validateResult)) {
+        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
         if (bean.editText.getText().toString().length() > bean.length) {
@@ -120,7 +120,7 @@ public class ValidateCore {
 
     public static boolean min(LengthBean bean, IValidateResult validateResult) {
         Log.e("TAG", "min" + bean.editText.getText().toString().length());
-        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add @NotNull ", validateResult)) {
+        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
         if (bean.editText.getText().toString().length() < bean.length) {

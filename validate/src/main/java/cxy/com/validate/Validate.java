@@ -5,6 +5,8 @@ import android.util.Log;
 import android.widget.EditText;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -19,7 +21,7 @@ import cxy.com.validate.bean.*;
  */
 public class Validate {
 
-    private static Map<Activity, List<Basebean>> activitys = new HashMap<>();
+    private static Map<Activity, List<AttrBean>> activitys = new HashMap<>();
 
     private static final String TYPE_NOTNULL = "NotNull";
     private static final String TYPE_REPEAT = "Repeat";
@@ -35,55 +37,68 @@ public class Validate {
             throw new RuntimeException("activity must register IValidateResult");
         }
 
-        List<Basebean> list = activitys.get(activity);
+        List<AttrBean> list = activitys.get(activity);
 
         if (list == null) {
             throw new RuntimeException("must be regedit validate in activity or this activity have annotation");
         }
+        for (AttrBean attrBean : list) {
+            if (attrBean.index == null) {
+                throw new RuntimeException(attrBean.name + " must set @Index");
+            }
+        }
+        Collections.sort(list, new Comparator<AttrBean>() {
+            public int compare(AttrBean arg0, AttrBean arg1) {
+                return arg0.index.compareTo(arg1.index);
+            }
+        });
+
 
         //key : @Repeat -> flag
         //value : @Repeat ->RepeatBean
         Map<String, List<RepeatBean>> repeatList = new LinkedHashMap<>();
-        for (Basebean bean : list) {
-            Log.e("TAG", "type = " + bean.type);
-            if (TYPE_NOTNULL.equals(bean.type)) {
-                if (ValidateCore.notNull(bean, validateResult)) {
-                    return;
-                }
-            } else if (TYPE_REPEAT.equals(bean.type)) {
-                String flag = ((RepeatBean) bean).flag;
-                List<RepeatBean> repeatBeen = repeatList.get(flag);
-                if (repeatBeen == null) {
-                    repeatBeen = new LinkedList<>();
-                    repeatList.put(flag, repeatBeen);
-                }
-                repeatBeen.add((RepeatBean) bean);
-                if (ValidateCore.repeat1((RepeatBean) bean, validateResult)) {
-                    return;
-                }
-            } else if (TYPE_REPEAT2.equals(bean.type)) {
-                String flag = ((RepeatBean) bean).flag;
-                List<RepeatBean> repeatBeen = repeatList.get(flag);
-                if (repeatBeen == null) {
-                    throw new RuntimeException("if you want to use【@RepeatLast】，mast use 【@Repeat】 first");
-                }
-                if (ValidateCore.repeat2((RepeatBean) bean, repeatBeen, validateResult)) {
-                    return;
-                }
-            } else if (TYPE_RE.equals(bean.type)) {
-                if (ValidateCore.re((REBean) bean, validateResult)) {
-                    return;
-                }
-            } else if (TYPE_MAXLENGTH.equals(bean.type)) {
-                if (ValidateCore.max((LengthBean) bean, validateResult)) {
-                    return;
-                }
-            } else if (TYPE_MINLENGTH.equals(bean.type)) {
-                if (ValidateCore.min((LengthBean) bean, validateResult)) {
-                    return;
+        for (AttrBean attrBean : list) {
+            for (Basebean bean : attrBean.annos) {
+                if (TYPE_NOTNULL.equals(bean.type)) {
+                    if (ValidateCore.notNull(bean, validateResult)) {
+                        return;
+                    }
+                } else if (TYPE_REPEAT.equals(bean.type)) {
+                    String flag = ((RepeatBean) bean).flag;
+                    List<RepeatBean> repeatBeen = repeatList.get(flag);
+                    if (repeatBeen == null) {
+                        repeatBeen = new LinkedList<>();
+                        repeatList.put(flag, repeatBeen);
+                    }
+                    repeatBeen.add((RepeatBean) bean);
+                    if (ValidateCore.repeat1((RepeatBean) bean, validateResult)) {
+                        return;
+                    }
+                } else if (TYPE_REPEAT2.equals(bean.type)) {
+                    String flag = ((RepeatBean) bean).flag;
+                    List<RepeatBean> repeatBeen = repeatList.get(flag);
+                    if (repeatBeen == null) {
+                        throw new NullPointerException("if you want to use【@RepeatLast】，mast use 【@Repeat】 first");
+                    }
+                    if (ValidateCore.repeat2((RepeatBean) bean, repeatBeen, validateResult)) {
+                        return;
+                    }
+                } else if (TYPE_RE.equals(bean.type)) {
+                    if (ValidateCore.re((REBean) bean, validateResult)) {
+                        return;
+                    }
+                } else if (TYPE_MAXLENGTH.equals(bean.type)) {
+                    if (ValidateCore.max((LengthBean) bean, validateResult)) {
+                        return;
+                    }
+                } else if (TYPE_MINLENGTH.equals(bean.type)) {
+                    if (ValidateCore.min((LengthBean) bean, validateResult)) {
+                        return;
+                    }
                 }
             }
         }
+
 
         validateResult.onValidateSuccess();
     }
@@ -175,26 +190,35 @@ public class Validate {
                             ) {
                         field.setAccessible(true);
 
-                        List<Basebean> editTextMap = activitys.get(activity);
+                        List<AttrBean> editTextMap = activitys.get(activity);
                         if (editTextMap == null) {
                             editTextMap = new LinkedList<>();
                             activitys.put(activity, editTextMap);
                         }
-
+                        AttrBean attr = new AttrBean();
+                        attr.name = field.getName();
+                        if (attr.annos == null) {
+                            attr.annos = new LinkedList<>();
+                        }
+                        editTextMap.add(attr);
                         if (field.isAnnotationPresent(NotNull.class))
-                            editTextMap.add(validateType(field, activity, TYPE_NOTNULL));
+                            attr.annos.add(validateType(field, activity, TYPE_NOTNULL));
                         if (field.isAnnotationPresent(Repeat.class))
-                            editTextMap.add(validateType(field, activity, TYPE_REPEAT));
+                            attr.annos.add(validateType(field, activity, TYPE_REPEAT));
                         if (field.isAnnotationPresent(RepeatLast.class))
-                            editTextMap.add(validateType(field, activity, TYPE_REPEAT2));
+                            attr.annos.add(validateType(field, activity, TYPE_REPEAT2));
                         if (field.isAnnotationPresent(RE.class))
-                            editTextMap.add(validateType(field, activity, TYPE_RE));
+                            attr.annos.add(validateType(field, activity, TYPE_RE));
                         if (field.isAnnotationPresent(MaxLength.class))
-                            editTextMap.add(validateType(field, activity, TYPE_MAXLENGTH));
+                            attr.annos.add(validateType(field, activity, TYPE_MAXLENGTH));
                         if (field.isAnnotationPresent(MinLength.class))
-                            editTextMap.add(validateType(field, activity, TYPE_MINLENGTH));
+                            attr.annos.add(validateType(field, activity, TYPE_MINLENGTH));
+                        if (field.isAnnotationPresent(Index.class))
+                            attr.index = field.getAnnotation(Index.class).value();
                     }
                 }
+                Log.e("TAG", "size " + activitys.get(activity).get(0).annos.size());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
