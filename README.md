@@ -19,10 +19,10 @@
 ## 使用
 onCreate中注册
 ```
- Validate.reg(this);
+Validate.check(MainActivity.this, MainActivity.this);
 ```
 
-实现IValidateResult接口，并重写三个方法
+implements IValidateResult
 ```
     @Override
     public void onValidateSuccess() {
@@ -51,7 +51,7 @@ onDestroy解注册
 
 | 注解 |说明|方法|
 |:--:|:--|:--|
-|@Index|<span style="color：blue；">索引</span> |value: 索引标记，用来标记验证的先后顺序，必须有这个注解|
+|@Index|索引 |value: 索引标记，用来标记验证的先后顺序，必须有这个注解|
 |@NotNull|非空验证|msg: 提示信息|
 |@Repeat|分组<br>Repeat: 多个edittext关联时，非最后一个|flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组|
 |@RepeatLast|分组<br>多个edittext关联时，最后一个|msg: 提示信息<br>flag:标记|
