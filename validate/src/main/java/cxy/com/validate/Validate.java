@@ -20,7 +20,7 @@ import cxy.com.validate.bean.*;
  * Created by CXY on 2016/11/2.
  */
 public class Validate {
-
+    private static final String TAG = "ValidateUI";
     private static Map<Activity, List<AttrBean>> activitys = new HashMap<>();
 
     private static final String TYPE_NOTNULL = "NotNull";
@@ -34,17 +34,20 @@ public class Validate {
     public static void check(Activity activity, IValidateResult validateResult) {
 
         if (validateResult == null) {
-            throw new RuntimeException("activity must register IValidateResult");
+            Log.e(TAG, "activity must register IValidateResult");
+            return;
         }
 
         List<AttrBean> list = activitys.get(activity);
 
         if (list == null) {
-            throw new RuntimeException("must be regedit validate in activity or this activity have annotation");
+            Log.e(TAG, "must be regedit validate in activity or this activity have annotation");
+            return;
         }
         for (AttrBean attrBean : list) {
             if (attrBean.index == null) {
-                throw new RuntimeException(attrBean.name + " must set @Index");
+                Log.e(TAG, "EditText " + attrBean.name + " must set @Index");
+                return;
             }
         }
         Collections.sort(list, new Comparator<AttrBean>() {
@@ -78,7 +81,8 @@ public class Validate {
                     String flag = ((RepeatBean) bean).flag;
                     List<RepeatBean> repeatBeen = repeatList.get(flag);
                     if (repeatBeen == null) {
-                        throw new NullPointerException("if you want to use【@RepeatLast】，mast use 【@Repeat】 first");
+                        Log.e(TAG, "If you want to use the 【@RepeatLast】, you must first use 【@Repeat】, or change their order of 【@Index】");
+                        return;
                     }
                     if (ValidateCore.repeat2((RepeatBean) bean, repeatBeen, validateResult)) {
                         return;
@@ -217,23 +221,9 @@ public class Validate {
                             attr.index = field.getAnnotation(Index.class).value();
                     }
                 }
-                Log.e("TAG", "size " + activitys.get(activity).get(0).annos.size());
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
-
-
-    private void text() {
-//                field.getType() = class android.widget.EditText
-//                field.getName() = et_phone
-//                field.getModifiers() = 0
-//                field.getType().getName() = android.widget.EditText
-//                field.getType().getSimpleName() = EditText
-//                field.getType().getCanonicalName() = android.widget.EditText
-//                field.getType().getPackage() = package android.widget
-//                EditText editText = (EditText)field.get(activity);
     }
 }

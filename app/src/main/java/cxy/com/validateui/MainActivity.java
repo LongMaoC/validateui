@@ -24,30 +24,30 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
 
     @Index(1)
     @NotNull(msg = "不能为空！")
-    private EditText etNotnull;
+     EditText etNotnull;
 
     @Index(4)
     @NotNull(msg = "两次密码验证->密码一不为能空！")
     @Repeat(flag = "AA")
-    private EditText etPw1;
+     EditText etPw1;
 
     @Index(5)
     @NotNull(msg = "两次密码验证->密码二不为能空！")
     @RepeatLast(flag = "AA", msg = "两次密码不一致！！！")
-    private EditText etPw2;
+     EditText etPw2;
 
     @Index(6)
     @NotNull(msg = "多次密码验证->密码一不为能空！")
     @Repeat(flag = "BB")
-    private EditText etPwFlag1;
+     EditText etPwFlag1;
     @Index(7)
     @NotNull(msg = "多次密码验证->密码二不为能空！")
     @Repeat(flag = "BB")
-    private EditText etPwFlag2;
+     EditText etPwFlag2;
     @Index(8)
     @NotNull(msg = "多次密码验证->密码三不为能空！")
     @RepeatLast(flag = "BB", msg = "三次密码不同")
-    private EditText etPwFlag3;
+     EditText etPwFlag3;
 
     @Index(9)
     @NotNull(msg = "请填写邮箱")
@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
         et_min = (EditText) findViewById(R.id.et_min);
 
 
-        etNotnull.setText("notnull");
-        etPw1.setText("etPw1");
-        etPw2.setText("etPw1");
-        etPwFlag1.setText("etPwFlag");
-        etPwFlag2.setText("etPwFlag");
-        etPwFlag3.setText("etPwFlag");
-        etRe.setText("129100149@qq.com");
+//        etNotnull.setText("notnull");
+//        etPw1.setText("etPw1");
+//        etPw2.setText("etPw1");
+//        etPwFlag1.setText("etPwFlag");
+//        etPwFlag2.setText("etPwFlag");
+//        etPwFlag3.setText("etPwFlag");
+//        etRe.setText("129100149@qq.com");
     }
 
     long startTime;

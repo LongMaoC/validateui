@@ -94,7 +94,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:hint="正则" />
+                android:hint="邮箱正则验证" />
 
             <TextView
                 android:layout_width="match_parent"
