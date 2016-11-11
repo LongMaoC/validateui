@@ -5,9 +5,13 @@
 * 验证非空
 * 多次确认密码
 * 正则验证
+* 索引顺序验证
+* 最大、最小长度验证
+
 
 # 特点
 * 简单！简单！简单！
+* 按照顺序验证
 * 验证失败可自定义动画
 * 以注解的方式进行配置
 * 可以自定义实现提示方式
@@ -45,8 +49,12 @@ onDestroy解注册
 
 以下请参照app->MainActivity.java . 更用以理解
 
-| 注解 |例子|备注|
+| 注解 |说明|方法|
 |:--:|:--|:--|
-|@NotNull<br>非空验证|@NotNull(msg = "不能为空！")<br>EditText etNotnull;|msg: 提示信息|
-|@Repeat<br>@RepeatLast<br>分组|@NotNull(msg = "两次密码验证->密码一不为能空！")<br>@Repeat(flag = "AA")<br>private EditText etPw1;<br><br>@NotNull(msg = "两次密码验证->密码二不为能空！")<br>@RepeatLast(flag = "AA", msg = "两次密码不一致！！！")<br>private EditText etPw2;|msg: 提示信息<br>flag: 标记组，当一个界面的两个或多个edittext需要关联时，可以设置flag分组，相同为一组<br>Repeat: 多个edittext关联时，非最后一个<br>Repeat: 多个edittext关联时，最后一个，需要配置两次文本不同时的提示信息|
-|@RE<br>正则验证| @NotNull(msg = "请填写邮箱")<br>@RE(re="\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}"msg = "格式错误！")<br>private EditText etRe;|re:正则表达式|
+|@Index|<span style="color：blue；">索引</span> |value: 索引标记，用来标记验证的先后顺序，必须有这个注解|
+|@NotNull|非空验证|msg: 提示信息|
+|@Repeat|分组<br>Repeat: 多个edittext关联时，非最后一个|flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组|
+|@RepeatLast|分组<br>多个edittext关联时，最后一个|msg: 提示信息<br>flag:标记|
+|@RE| 正则验证|msg: 提示信息<br>re:正则表达式|
+|@MinLength|最低长度|msg: 提示信息<br>length:最低长度(包含)|
+|@MaxLength|最大长度|msg: 提示信息<br>length:最大长度(包含)|
