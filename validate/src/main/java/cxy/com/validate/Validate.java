@@ -192,8 +192,8 @@ public class Validate {
                             field.isAnnotationPresent(MinLength.class) ||
                             field.isAnnotationPresent(Index.class)
                             ) {
-                        if (!field.getType().getName().equals("annotation must be on the EditText")) {
-                            throw new RuntimeException();
+                        if (!field.getType().getName().equals("android.widget.EditText")) {
+                            throw new RuntimeException("annotation must be on the EditText");
                         }
                         field.setAccessible(true);
 
