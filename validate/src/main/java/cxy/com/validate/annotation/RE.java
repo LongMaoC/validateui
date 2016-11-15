@@ -8,6 +8,11 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 public @interface RE {
+    String only_Chinese="^[\\u4e00-\\u9fa5]{0,}$";
+    String only_number="^[0-9]*$";
+    String number_letter_underline="^\\w+$";
+    String email="\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}";
+
     String re()  ;
     String msg()  ;
 }

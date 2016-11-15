@@ -13,8 +13,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import cxy.com.validate.annotation.*;
-import cxy.com.validate.bean.*;
+import cxy.com.validate.annotation.Index;
+import cxy.com.validate.annotation.MaxLength;
+import cxy.com.validate.annotation.MinLength;
+import cxy.com.validate.annotation.Money;
+import cxy.com.validate.annotation.NotNull;
+import cxy.com.validate.annotation.RE;
+import cxy.com.validate.annotation.Repeat;
+import cxy.com.validate.annotation.RepeatLast;
+import cxy.com.validate.bean.AttrBean;
+import cxy.com.validate.bean.Basebean;
+import cxy.com.validate.bean.LengthBean;
+import cxy.com.validate.bean.MoneyBean;
+import cxy.com.validate.bean.NotNullBean;
+import cxy.com.validate.bean.REBean;
+import cxy.com.validate.bean.RepeatBean;
 
 /**
  * Created by CXY on 2016/11/2.
@@ -29,6 +42,7 @@ public class Validate {
     private static final String TYPE_RE = "RE";
     private static final String TYPE_MAXLENGTH = "MaxLength";
     private static final String TYPE_MINLENGTH = "MinLength";
+    private static final String TYPE_MONEY = "MONEY";
 
 
     public static void check(Activity activity, IValidateResult validateResult) {
@@ -97,6 +111,10 @@ public class Validate {
                     }
                 } else if (TYPE_MINLENGTH.equals(bean.type)) {
                     if (ValidateCore.min((LengthBean) bean, validateResult)) {
+                        return;
+                    }
+                }else if (TYPE_MONEY.equals(bean.type)) {
+                    if (ValidateCore.money((MoneyBean) bean, validateResult)) {
                         return;
                     }
                 }
@@ -173,6 +191,14 @@ public class Validate {
                 bean.type = TYPE_MINLENGTH;
                 bean.length = anno.length();
                 return bean;
+            }else if (type.equals(TYPE_MONEY)) {
+                Money anno = field.getAnnotation(Money.class);
+                MoneyBean bean = new MoneyBean();
+                bean.editText = (EditText) field.get(activity);
+                bean.msg = anno.msg();
+                bean.type = TYPE_MONEY;
+                bean.keep = anno.keey();
+                return bean;
             }
 
             return null;
@@ -190,10 +216,12 @@ public class Validate {
                             field.isAnnotationPresent(RE.class) ||
                             field.isAnnotationPresent(MaxLength.class) ||
                             field.isAnnotationPresent(MinLength.class) ||
-                            field.isAnnotationPresent(Index.class)
+                            field.isAnnotationPresent(Index.class)||
+                            field.isAnnotationPresent(Money.class)
                             ) {
-                        if (!field.getType().getName().equals("android.widget.EditText")) {
-                            throw new RuntimeException("annotation must be on the EditText");
+
+                        if (!(field.getType().getName().equals("android.widget.EditText"))) {
+                            throw new RuntimeException("annotation must be on the EditText or TextView");
                         }
                         field.setAccessible(true);
 
@@ -220,6 +248,8 @@ public class Validate {
                             attr.annos.add(validateType(field, activity, TYPE_MAXLENGTH));
                         if (field.isAnnotationPresent(MinLength.class))
                             attr.annos.add(validateType(field, activity, TYPE_MINLENGTH));
+                        if (field.isAnnotationPresent(Money.class))
+                            attr.annos.add(validateType(field, activity, TYPE_MONEY));
                         if (field.isAnnotationPresent(Index.class))
                             attr.index = field.getAnnotation(Index.class).value();
                     }

@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import cxy.com.validate.bean.Basebean;
 import cxy.com.validate.bean.LengthBean;
+import cxy.com.validate.bean.MoneyBean;
 import cxy.com.validate.bean.REBean;
 import cxy.com.validate.bean.RepeatBean;
 
@@ -106,7 +107,6 @@ public class ValidateCore {
     }
 
     public static boolean max(LengthBean bean, IValidateResult validateResult) {
-        Log.e("TAG", "max" + bean.editText.getText().toString().length());
         if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
@@ -119,11 +119,34 @@ public class ValidateCore {
     }
 
     public static boolean min(LengthBean bean, IValidateResult validateResult) {
-        Log.e("TAG", "min" + bean.editText.getText().toString().length());
         if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
             return true;
         }
         if (bean.editText.getText().toString().length() < bean.length) {
+            setEditText(bean.editText, validateResult);
+            validateResult.onValidateError(bean.msg, bean.editText);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean money(MoneyBean bean, IValidateResult validateResult) {
+        if (notNull(bean.editText, "EditText content is null or \"\" ,  You can add 【@NotNull】 ", validateResult)) {
+            return true;
+        }
+        String keep = null;
+        keep = String.valueOf(bean.keep);
+        if (bean.keep > 2) {
+            keep = String.valueOf(2);
+        }
+        if (bean.keep <= 0) {
+            keep = String.valueOf(1);
+        }
+
+        String re = "^(?!0+(?:\\.0+)?$)(?:[1-9]\\d*|0)\\.(?:\\d{"+keep+"})?$";
+        Pattern r = Pattern.compile(re);
+        Matcher m = r.matcher(bean.editText.getText().toString());
+        if (!m.matches()) {
             setEditText(bean.editText, validateResult);
             validateResult.onValidateError(bean.msg, bean.editText);
             return true;

@@ -1,6 +1,5 @@
 package cxy.com.validateui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +15,7 @@ import cxy.com.validate.ValidateAnimation;
 import cxy.com.validate.annotation.Index;
 import cxy.com.validate.annotation.MaxLength;
 import cxy.com.validate.annotation.MinLength;
+import cxy.com.validate.annotation.Money;
 import cxy.com.validate.annotation.NotNull;
 import cxy.com.validate.annotation.RE;
 import cxy.com.validate.annotation.Repeat;
@@ -23,11 +23,20 @@ import cxy.com.validate.annotation.RepeatLast;
 
 
 public class MainActivity extends AppCompatActivity implements IValidateResult {
-
     @Index(1)
     @NotNull(msg = "不能为空！")
     @Bind(R.id.et_notnull)
     EditText etNotnull;
+
+    @Index(3)
+    @Bind(R.id.et_max)
+    @MaxLength(length = 3, msg = "超出最大长度")
+    EditText et_max;
+
+    @Index(2)
+    @Bind(R.id.et_min)
+    @MinLength(length = 3, msg = "错误，字符数目不够")
+    EditText et_min;
 
     @Index(4)
     @NotNull(msg = "两次密码验证->密码一不为能空！")
@@ -57,20 +66,33 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
     @Bind(R.id.et_pw_flag3)
     EditText etPwFlag3;
 
-    @Index(9)
-    @NotNull(msg = "请填写邮箱")
-    @Bind(R.id.et_re)
-    @RE(re = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}", msg = "格式错误！")
-    EditText etRe;
 
-    @Index(2)
-    @Bind(R.id.et_max)
-    @MaxLength(length = 3, msg = "超出最大长度")
-    EditText et_max;
-    @Index(3)
-    @Bind(R.id.et_min)
-    @MinLength(length = 3, msg = "错误，字符数目不够")
-    EditText et_min;
+    @Index(10)
+    @Money(msg = "格式不正确，请重新输入", keey = 2)
+    @Bind(R.id.et_money)
+    EditText etMoney;
+
+    @Index(11)
+    @RE(re = RE.only_Chinese,msg = "仅可输入中文，请重新输入")
+    @Bind(R.id.et_only_Chinese)
+    EditText etOnlyChinese;
+
+    @Index(12)
+    @RE(re = RE.only_number,msg = "仅可输入数字，请重新输入")
+    @Bind(R.id.et_only_number)
+    EditText etOnlyNumber;
+
+    @Index(13)
+    @RE(re = RE.number_letter_underline,msg = "仅可输入 数字 字母 下划线")
+    @Bind(R.id.et_number_letter_underline)
+    EditText etNumberLetterUnderline;
+
+    @Index(14)
+    @RE(re = RE.email,msg = "请输入正确的邮箱")
+    @Bind(R.id.et_email)
+    EditText etEmail;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +109,19 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
             }
         });
 
+//        init();
+    }
 
+
+    private void init() {
+        etNotnull.setText("1209101049@qq.com");
+        etPw1.setText("111");
+        etPw2.setText("111");
+        etPwFlag1.setText("222");
+        etPwFlag2.setText("222");
+        etPwFlag3.setText("222");
+        et_max.setText("11");
+        et_min.setText("1111");
     }
 
     @Override
@@ -111,4 +145,6 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
     public Animation onValidateErrorAnno() {
         return ValidateAnimation.horizontalTranslate();
     }
+
+
 }

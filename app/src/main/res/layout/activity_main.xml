@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+<!---->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,7 +27,28 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:hint="" />
+                android:hint="非空验证" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="长度验证" />
+
+            <EditText
+                android:id="@+id/et_max"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="最大长度三的验证" />
+
+            <EditText
+                android:id="@+id/et_min"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="最小长度三的验证" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -82,6 +103,21 @@
                 android:layout_marginTop="5dp"
                 android:hint="多次密码->第三次确认密码" />
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ECECEC"
+                android:gravity="center_horizontal"
+                android:text="金额验证" />
+
+            <EditText
+                android:id="@+id/et_money"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="小数后两位的金额验证" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,32 +126,32 @@
                 android:text="正则验证" />
 
             <EditText
-                android:id="@+id/et_re"
+                android:id="@+id/et_only_Chinese"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:hint="邮箱正则验证" />
+                android:hint="仅中文验证" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ECECEC"
-                android:gravity="center_horizontal"
-                android:text="长度验证" />
             <EditText
-                android:id="@+id/et_max"
+                android:id="@+id/et_only_number"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:hint="最大长度三的验证" />
+                android:hint="仅数字验证" />
+
             <EditText
-                android:id="@+id/et_min"
+                android:id="@+id/et_number_letter_underline"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:hint="最小长度三的验证" />
+                android:hint="数字、字母、下划线 验证" />
 
-
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="email验证" />
 
         </LinearLayout>
 
