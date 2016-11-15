@@ -19,6 +19,7 @@
 
 # **_功能_**
 
+
 | 注解 | 功能|
 |:-|:-:|
 |@Index|索引|
@@ -30,9 +31,6 @@
 |@Repeat|重复类型验证|
 |@RepeatLast|重复类型验证|
 
- <a href="https://github.com/LongMaoC/validateui/blob/master/app/src/main/java/cxy/com/validateui/MainActivity.java">详细内容请参考MainActivity</a>
-
- <a>使用说明 ↓↓↓ </a>
 
 ## 部分栗子
 ```
