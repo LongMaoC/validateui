@@ -10,8 +10,8 @@
 
 ## 版本
 * v2.0
-  * 增加 可以在TextView上进行标记 应用场景
-  
+  * 增加 可以在TextView上进行标记
+      * 应用场景
           * ![image](https://github.com/LongMaoC/validateui/blob/master/gif/item_notnull.png)
           * ![image](https://github.com/LongMaoC/validateui/blob/master/gif/item_null.png)
   * 增加 @Password1   @Password2  两个注解
@@ -154,7 +154,7 @@ Validate.check(MainActivity.this, MainActivity.this);
 |@MinLength|最低长度验证|msg: 提示信息<br>length:最低长度(包含)|
 |@MaxLength|最大长度验证|msg: 提示信息<br>length:最大长度(包含)|
 |@Money|金额验证|msg: 提示信息<br>keey:保留位数，范围1或2，大于范围取边界值|
-|@Password1|密码验证第一次|·----|
+|@Password1|密码验证第一次|-----|
 |@Password1|密码验证第二次|msg:两次密码不一样时候的提示信息|
 |~~@Repeat~~|~~分组<br>Repeat: 多个edittext关联时，非最后一个~~|~~flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组~~|
 |~~@RepeatLast~~|~~分组<br>多个edittext关联时，最后一个~~|~~msg: 提示信息<br>flag:标记~~|
