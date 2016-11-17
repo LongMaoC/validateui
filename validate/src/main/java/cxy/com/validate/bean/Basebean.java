@@ -9,14 +9,5 @@ import android.widget.EditText;
 public class Basebean {
     public String msg;
     public String type;
-    public EditText editText;
 
-    @Override
-    public String toString() {
-        return "Basebean{" +
-                "msg='" + msg + '\'' +
-                ", type='" + type + '\'' +
-                ", editText=" + editText +
-                '}';
-    }
 }

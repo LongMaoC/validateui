@@ -10,16 +10,13 @@ import java.util.List;
  */
 
 public class AttrBean {
+    public static final int ET = 0x1100;
+    public static final int TV = 0x0011;
+
     public Integer index ;
     public String name ;
-    public LinkedList<Basebean> annos ;
+    public Object view ;
+    public boolean isEt ;
 
-    @Override
-    public String toString() {
-        return "AttrBean{" +
-                "index=" + index +
-                ", name='" + name + '\'' +
-                ", annos=" + annos +
-                '}';
-    }
+    public LinkedList<Basebean> annos ;
 }

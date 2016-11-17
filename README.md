@@ -1,14 +1,21 @@
 # validateUI
 
 ## 一个表单验证的lib
-![image](https://github.com/LongMaoC/validateui/blob/master/gif/app.jpg)
+![image](https://github.com/LongMaoC/validateui/blob/master/gif/app_2.0.jpg)
 
 
 ```
-  compile 'com.github.LongMaoC:validateui:v1.6'
+  compile 'com.github.LongMaoC:validateui:v2.0'
 ```
 
 ## 版本
+* v2.0
+  * 增加 可以在TextView上进行标记
+      * 应用场景
+          * ![image](https://github.com/LongMaoC/validateui/blob/master/gif/item_notnull.png)
+          * ![image](https://github.com/LongMaoC/validateui/blob/master/gif/item_null.png)
+  * 增加 @Password1   @Password2  两个注解
+  * 删掉 @RepeatLast  @Repeat 两个注解
 * v1.6
   * 增加Money注解
   * 增加 常用增则规则。(邮箱，仅中文，仅数字···)
@@ -28,57 +35,50 @@
 |@Money|金额验证|
 |@NotNull|非空验证|
 |@RE|正则验证|
-|@Repeat|重复类型验证|
-|@RepeatLast|重复类型验证|
+|@Password1|密码验证第一次|
+|@Password2|密码验证第二次|
+|~~@Repeat~~|~~重复类型验证~~|
+|~~@RepeatLast~~|~~重复类型验证~~|
 
 
 ## 部分栗子
 ```
-    @Index(1)
-    @NotNull(msg = "不能为空！")
-    @Bind(R.id.et_notnull)
-    EditText etNotnull;
+   @Index(1)
+   @NotNull(msg = "不能为空！")
+   @Bind(R.id.et_notnull)
+   EditText etNotnull;
 
-    @Index(3)
-    @Bind(R.id.et_max)
-    @MaxLength(length = 3, msg = "超出最大长度")
-    EditText et_max;
+   @Index(3)
+   @Bind(R.id.et_max)
+   @MaxLength(length = 3, msg = "超出最大长度")
+   EditText et_max;
 
-    @Index(6)
-    @NotNull(msg = "多次密码验证->密码一不为能空！")
-    @Repeat(flag = "BB")
-    @Bind(R.id.et_pw_flag1)
-    EditText etPwFlag1;
-    @Index(7)
-    @NotNull(msg = "多次密码验证->密码二不为能空！")
-    @Repeat(flag = "BB")
-    @Bind(R.id.et_pw_flag2)
-    EditText etPwFlag2;
-    @Index(8)
-    @NotNull(msg = "多次密码验证->密码三不为能空！")
-    @RepeatLast(flag = "BB", msg = "三次密码不同")
-    @Bind(R.id.et_pw_flag3)
-    EditText etPwFlag3;
+   @Index(4)
+   @NotNull(msg = "两次密码验证->密码一不为能空！")
+   @Password1()
+   @Bind(R.id.et_pw1)
+   EditText etPw1;
 
-    @Index(10)
-    @Money(msg = "格式不正确，请重新输入", keey = 2)
-    @Bind(R.id.et_money)
-    EditText etMoney;
+   @Index(5)
+   @NotNull(msg = "两次密码验证->密码二不为能空！")
+   @Password2(msg = "两次密码不一致！！！")
+   @Bind(R.id.et_pw2)
+   EditText etPw2;
 
-    @Index(11)
-    @RE(re = RE.only_Chinese,msg = "仅可输入中文，请重新输入")
-    @Bind(R.id.et_only_Chinese)
-    EditText etOnlyChinese;
+   @Index(10)
+   @Money(msg = "格式不正确，请重新输入", keey = 2)
+   @Bind(R.id.et_money)
+   EditText etMoney;
 
-    @Index(12)
-    @RE(re = RE.only_number,msg = "仅可输入数字，请重新输入")
-    @Bind(R.id.et_only_number)
-    EditText etOnlyNumber;
+   @Index(11)
+   @RE(re = RE.only_Chinese, msg = "仅可输入中文，请重新输入")
+   @Bind(R.id.et_only_Chinese)
+   EditText etOnlyChinese;
 
-    @Index(13)
-    @RE(re = RE.number_letter_underline,msg = "仅可输入 数字 字母 下划线")
-    @Bind(R.id.et_number_letter_underline)
-    EditText etNumberLetterUnderline;
+   @Index(15)
+   @NotNull(msg = "tv不能为空")
+   @Bind(R.id.tv_textview)
+   TextView tvTextview;
 ```
 
 
@@ -102,7 +102,7 @@ allprojects {
 ```
 app build.gradle
 ```
-  compile 'com.github.LongMaoC:validateui:v1.6'
+  compile 'com.github.LongMaoC:validateui:v2.0'
 ```
 
 
@@ -122,8 +122,12 @@ Validate.check(MainActivity.this, MainActivity.this);
         Toast.makeText(this, "验证成功", Toast.LENGTH_SHORT).show();
     }
 
+    //当 验证 TextView出错时， editText参数返回null
     @Override
-    public void onValidateError(EditText editText, String msg) {
+    public void onValidateError(String msg, EditText editText) {
+        if (editText != null)
+            editText.setFocusable(true);
+
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -146,13 +150,14 @@ Validate.check(MainActivity.this, MainActivity.this);
 |:--:|:--|:--|
 |@Index|索引 |value: 索引标记，用来标记验证的先后顺序，必须有这个注解|
 |@NotNull|非空验证|msg: 提示信息|
-|@Repeat|分组<br>Repeat: 多个edittext关联时，非最后一个|flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组|
-|@RepeatLast|分组<br>多个edittext关联时，最后一个|msg: 提示信息<br>flag:标记|
 |@RE| 正则验证|msg: 提示信息<br>re:正则表达式<br>RE.only_Chinese：仅中文<br>RE.only_number:仅数字<br>RE.number_letter_underline:数字、字母、下划线<br>RE.email:邮箱|
 |@MinLength|最低长度验证|msg: 提示信息<br>length:最低长度(包含)|
 |@MaxLength|最大长度验证|msg: 提示信息<br>length:最大长度(包含)|
 |@Money|金额验证|msg: 提示信息<br>keey:保留位数，范围1或2，大于范围取边界值|
-
+|@Password1|密码验证第一次|·----|
+|@Password1|密码验证第二次|msg:两次密码不一样时候的提示信息|
+|~~@Repeat~~|~~分组<br>Repeat: 多个edittext关联时，非最后一个~~|~~flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组~~|
+|~~@RepeatLast~~|~~分组<br>多个edittext关联时，最后一个~~|~~msg: 提示信息<br>flag:标记~~|
 
 
 
