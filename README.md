@@ -11,6 +11,7 @@
 ## 版本
 * v2.0
   * 增加 可以在TextView上进行标记 应用场景
+  
           * ![image](https://github.com/LongMaoC/validateui/blob/master/gif/item_notnull.png)
           * ![image](https://github.com/LongMaoC/validateui/blob/master/gif/item_null.png)
   * 增加 @Password1   @Password2  两个注解
