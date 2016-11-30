@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements IValidateResult {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        ButterKnife.bind(this);
 
         Validate.reg(this);
 

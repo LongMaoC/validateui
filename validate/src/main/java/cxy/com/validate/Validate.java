@@ -33,6 +33,7 @@ import cxy.com.validate.bean.REBean;
  * Created by CXY on 2016/11/2.
  */
 public class Validate {
+    public static boolean isDebug = false ;
     private static final String TAG = "ValidateUI";
     private static Map<Activity, List<AttrBean>> activitys = new HashMap<>();
 
@@ -195,7 +196,10 @@ public class Validate {
                             field.isAnnotationPresent(Password1.class) ||
                             field.isAnnotationPresent(Password2.class)
                             ) {
-
+                        if(isDebug){
+                            Log.e(TAG,"SimpleName = "+field.getType().getSimpleName());
+                            Log.e(TAG,"Name = "+field.getName());
+                        }
                         if (!(field.getType() == EditText.class || field.getType() == TextView.class)) {
                             throw new RuntimeException("annotation must be on the EditText or TextView");
                         }
