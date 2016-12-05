@@ -112,6 +112,11 @@ app build.gradle
 
 #### onCreate中注册
 ```
+Validate.reg(this);
+```
+
+#### 在按钮的点击事件中添加
+```
 Validate.check(MainActivity.this, MainActivity.this);
 ```
 
