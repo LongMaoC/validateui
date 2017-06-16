@@ -5,7 +5,7 @@
 
 
 ```
-  compile 'com.github.LongMaoC:validateui:v2.0'
+  compile 'com.github.LongMaoC:validateui:v2.1'
 ```
 
 ## 版本
