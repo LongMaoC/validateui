@@ -1,6 +1,7 @@
 package cxy.com.validate;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,9 +38,9 @@ public class ValidateCore {
                 if (validateResult.onValidateErrorAnno() != null) {
                     ((EditText) view).startAnimation(validateResult.onValidateErrorAnno());
                 }
-                validateResult.onValidateError("EditText " + msg, ((EditText) view));
+                Log.e("ValidateUI","EditText " + msg);
             } else {
-                validateResult.onValidateError("TextView " + msg, null);
+                Log.e("ValidateUI","TextView " + msg);
             }
             return true;
         }
