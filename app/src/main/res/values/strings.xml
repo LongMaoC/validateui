@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ValidateUI</string>
+    <string name="str_validate_programer_msg">选择 程序员，则 验证手机号与姓名</string>
+    <string name="str_validate_boss_msg">选择老板，则 只验证手机号</string>
+
+    <string name="str_validate_pm_msg">选择 产品经理，则 全部进行校验</string>
+
 </resources>

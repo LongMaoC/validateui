@@ -12,4 +12,5 @@ public interface IValidateResult {
     void onValidateError( String msg,EditText editText);
 
     Animation onValidateErrorAnno();
+
 }

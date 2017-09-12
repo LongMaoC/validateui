@@ -1,7 +1,9 @@
 package cxy.com.validate;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import cxy.com.validate.annotation.NotNull;
 import cxy.com.validate.annotation.Password1;
 import cxy.com.validate.annotation.Password2;
 import cxy.com.validate.annotation.RE;
+import cxy.com.validate.annotation.Shield;
 import cxy.com.validate.bean.AttrBean;
 import cxy.com.validate.bean.Basebean;
 import cxy.com.validate.bean.LengthBean;
@@ -33,9 +36,8 @@ import cxy.com.validate.bean.REBean;
  * Created by CXY on 2016/11/2.
  */
 public class Validate {
-    public static boolean isDebug = false ;
     private static final String TAG = "ValidateUI";
-    private static Map<Activity, List<AttrBean>> activitys = new HashMap<>();
+    private static Map<Object, List<AttrBean>> activitys = new HashMap<>();
 
     private static final String TYPE_NOTNULL = "NotNull";
     private static final String TYPE_RE = "RE";
@@ -44,19 +46,26 @@ public class Validate {
     private static final String TYPE_MONEY = "MONEY";
     private static final String TYPE_PASSWORD1 = "PASSWORD1";
     private static final String TYPE_PASSWORD2 = "PASSWORD2";
+    private static final String TYPE_SHIELD = "Shield";
 
 
-    public static void check(Activity activity, IValidateResult validateResult) {
+    public static void check(Object activity, IValidateResult validateResult) {
+        check(activity, false, validateResult);
+    }
 
+    public static void check(Object activity, boolean isShield, IValidateResult validateResult) {
+        if (activity == null) return;
+
+        String simpleName = activity.getClass().getSimpleName();
         if (validateResult == null) {
-            Log.e(TAG, "activity must register IValidateResult");
+            Log.e(TAG, "IValidateResult can not be empty");
             return;
         }
 
         List<AttrBean> list = activitys.get(activity);
 
         if (list == null) {
-            Log.e(TAG, "must be regedit validate in activity or this activity have annotation");
+            Log.e(TAG, " must call the Validate.reg()  or this activity have annotation");
             return;
         }
         for (AttrBean attrBean : list) {
@@ -65,6 +74,7 @@ public class Validate {
                 return;
             }
         }
+
         Collections.sort(list, new Comparator<AttrBean>() {
             public int compare(AttrBean arg0, AttrBean arg1) {
                 return arg0.index.compareTo(arg1.index);
@@ -72,10 +82,15 @@ public class Validate {
         });
 
 
-        //key : @Repeat -> flag
-        //value : @Repeat ->RepeatBean
         for (AttrBean attrBean : list) {
+
             for (Basebean bean : attrBean.annos) {
+                if (isShield) {
+                    if (TYPE_SHIELD.equals(attrBean.annos.getLast().type)) {
+                        break;
+                    }
+                }
+
                 if (TYPE_NOTNULL.equals(bean.type)) {
                     if (ValidateCore.notNull(attrBean.view, attrBean.isEt, bean.msg, validateResult)) {
                         return;
@@ -105,33 +120,35 @@ public class Validate {
                     if (ValidateCore.password2(attrBean, pwd1Attr, attrBean.isEt, (PasswordBean) bean, validateResult)) {
                         return;
                     }
+                    pwd1Attr = null;
                 }
             }
         }
-
-
         validateResult.onValidateSuccess();
+        pwd1Attr = null;
     }
 
-    static AttrBean pwd1Attr = null;
 
-    public static void reg(final Activity activity) {
-        new Thread(new ValidateRegRunnable(activity)).start();
+    private static AttrBean pwd1Attr = null;
+
+    public static void reg(final Object target) {
+        new Thread(new ValidateRegRunnable(target)).start();
     }
 
-    public static void unreg(Activity activity) {
-        activitys.remove(activity);
+    public static void unreg(Object target) {
+        activitys.remove(target);
     }
 
 
     static class ValidateRegRunnable implements Runnable {
-        Activity activity;
+        Object target;
 
-        public ValidateRegRunnable(Activity activity) {
-            this.activity = activity;
+        public ValidateRegRunnable(Object target) {
+            this.target = target;
         }
 
-        private Basebean validateType(Field field, Activity activity, String type) throws IllegalAccessException {
+
+        private Basebean validateType(Field field, String type) throws IllegalAccessException {
             if (type.equals(TYPE_NOTNULL)) {
                 NotNull notnull = field.getAnnotation(NotNull.class);
                 NotNullBean bean = new NotNullBean();
@@ -176,6 +193,11 @@ public class Validate {
                 bean.msg = anno.msg();
                 bean.type = TYPE_PASSWORD2;
                 return bean;
+            } else if (type.equals(TYPE_SHIELD)) {
+                Shield anno = field.getAnnotation(Shield.class);
+                Basebean bean = new Basebean();
+                bean.type = TYPE_SHIELD;
+                return bean;
             }
 
             return null;
@@ -184,7 +206,7 @@ public class Validate {
         @Override
         public void run() {
             try {
-                Class<? extends Activity> clazz = activity.getClass();
+                Class clazz = target.getClass();
 
                 for (Field field : clazz.getDeclaredFields()) {
                     if (field.isAnnotationPresent(NotNull.class) ||
@@ -196,23 +218,20 @@ public class Validate {
                             field.isAnnotationPresent(Password1.class) ||
                             field.isAnnotationPresent(Password2.class)
                             ) {
-                        if(isDebug){
-                            Log.e(TAG,"SimpleName = "+field.getType().getSimpleName());
-                            Log.e(TAG,"Name = "+field.getName());
-                        }
+
                         if (!(field.getType() == EditText.class || field.getType() == TextView.class)) {
                             throw new RuntimeException("annotation must be on the EditText or TextView");
                         }
                         field.setAccessible(true);
 
-                        List<AttrBean> editTextMap = activitys.get(activity);
+                        List<AttrBean> editTextMap = activitys.get(target);
                         if (editTextMap == null) {
                             editTextMap = new LinkedList<>();
-                            activitys.put(activity, editTextMap);
+                            activitys.put(target, editTextMap);
                         }
                         AttrBean attr = new AttrBean();
                         attr.name = field.getName();
-                        attr.view = field.get(activity);
+                        attr.view = field.get(target);
 
                         if (field.getType() == EditText.class) {
                             attr.isEt = true;
@@ -224,22 +243,24 @@ public class Validate {
                         }
                         editTextMap.add(attr);
                         if (field.isAnnotationPresent(NotNull.class))
-                            attr.annos.add(validateType(field, activity, TYPE_NOTNULL));
+                            attr.annos.add(validateType(field, TYPE_NOTNULL));
 
                         if (field.isAnnotationPresent(RE.class))
-                            attr.annos.add(validateType(field, activity, TYPE_RE));
+                            attr.annos.add(validateType(field, TYPE_RE));
                         if (field.isAnnotationPresent(MaxLength.class))
-                            attr.annos.add(validateType(field, activity, TYPE_MAXLENGTH));
+                            attr.annos.add(validateType(field, TYPE_MAXLENGTH));
                         if (field.isAnnotationPresent(MinLength.class))
-                            attr.annos.add(validateType(field, activity, TYPE_MINLENGTH));
+                            attr.annos.add(validateType(field, TYPE_MINLENGTH));
                         if (field.isAnnotationPresent(Money.class))
-                            attr.annos.add(validateType(field, activity, TYPE_MONEY));
+                            attr.annos.add(validateType(field, TYPE_MONEY));
                         if (field.isAnnotationPresent(Password1.class))
-                            attr.annos.add(validateType(field, activity, TYPE_PASSWORD1));
+                            attr.annos.add(validateType(field, TYPE_PASSWORD1));
                         if (field.isAnnotationPresent(Password2.class))
-                            attr.annos.add(validateType(field, activity, TYPE_PASSWORD2));
+                            attr.annos.add(validateType(field, TYPE_PASSWORD2));
                         if (field.isAnnotationPresent(Index.class))
                             attr.index = field.getAnnotation(Index.class).value();
+                        if (field.isAnnotationPresent(Shield.class))
+                            attr.annos.add(validateType(field, TYPE_SHIELD));
                     }
                 }
             } catch (Exception e) {
