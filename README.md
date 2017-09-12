@@ -9,18 +9,13 @@
   ```
 
 
-### 部分效果图(![demo下载](https://github.com/LongMaoC/validateui/blob/master/apk/demo.png))
+### 部分效果图(demo在根目录下 apk/demo.apk)
 
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_common.png)
-
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_shield.png)
-
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_return_act.png)
 
-
-
 # 特点
-
   * 不关心验证过程，只关注验证结果
   * 按照自定义顺序验证
   * 验证失败可自定义动画
