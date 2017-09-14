@@ -15,6 +15,9 @@
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_shield.png)
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_return_act.png)
 
+# 更新内容
+  * <span style="color: #FF0000;">20170914 更新内容：新增@Shield注解在项目中使用的demo</span>
+
 # 特点
   * 不关心验证过程，只关注验证结果
   * 按照自定义顺序验证
@@ -22,7 +25,6 @@
   * 以注解的方式进行配置
 
 ## 版本
-
 * v2.2
   * 添加 @Shield 注解。
   * 对 Fragment 进行支持
@@ -158,7 +160,7 @@ public void onClick(View v ){
 ```
 
 
-#### 添加注解
+#### 注解说明
 
 以下请参照cxy.com.validateui.activity包下的activity 以便理解
 
@@ -172,7 +174,7 @@ public void onClick(View v ){
 |@MaxLength|最大长度验证|msg: 提示信息<br>length:最大长度(包含)|
 |@Money|金额验证|msg: 提示信息<br>keey:保留位数，范围1或2，大于范围取边界值|
 |@Password1|密码验证第一次|-----|
-|@Password1|密码验证第二次|msg:两次密码不一样时候的提示信息|
+|@Password2|密码验证第二次|msg:两次密码不一样时候的提示信息|
 |~~@Repeat~~|~~分组<br>Repeat: 多个edittext关联时，非最后一个~~|~~flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组~~|
 |~~@RepeatLast~~|~~分组<br>多个edittext关联时，最后一个~~|~~msg: 提示信息<br>flag:标记~~|
 

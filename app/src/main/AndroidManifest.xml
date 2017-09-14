@@ -19,6 +19,7 @@
         <activity android:name=".activity.ShieldActivity" />
         <activity android:name=".activity.ReturnActivity" />
         <activity android:name=".activity.FragmentActivity" />
+        <activity android:name=".activity.ShieldDemoActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#ECECEC">
+
+  
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:background="#969696" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="安全问题"
+            android:textColor="#969696"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:background="#969696" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="您常用的APP是什么？"
+        android:textColor="#4A4A4A" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="答案"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请输入您的安全问题答案"
+            android:id="@+id/et_answer"
+            android:paddingLeft="16dp"
+            android:textColorHint="#969696" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_height="40dp">
+        <TextView
+            android:paddingRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="忘记答案？请联系客服"
+            android:textColor="#969696" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="新密码"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请输入6位数字密码"
+            android:paddingLeft="16dp"
+            android:id="@+id/et_new_pwd1"
+            android:textColorHint="#969696" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="确认密码"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请再次输入6位数字密码"
+            android:id="@+id/et_new_pwd2"
+            android:paddingLeft="16dp"
+            android:textColorHint="#969696" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1sp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:maxLength="11"
+            android:id="@+id/et_phone"
+            android:hint="请输入手机号"
+            android:paddingLeft="16dp"
+            android:textColorHint="#969696" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1sp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="验证码"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请查收短信"
+            android:paddingLeft="16dp"
+            android:id="@+id/et_code"
+            android:maxLength="10"
+            android:layout_weight="1"
+            android:textColorHint="#969696" />
+
+        <TextView
+            android:id="@+id/tv_countDown"
+            android:layout_width="78dp"
+            android:layout_height="28dp"
+            android:layout_margin="16sp"
+            android:gravity="center"
+            android:text="发送验证码"
+            android:background="@drawable/shap_border_rect_border_00ccc6"
+            android:textColor="#00CCC6" />
+    </LinearLayout>
+
+
+    <Button
+        android:layout_marginTop="50sp"
+        android:layout_width="match_parent"
+        android:text="确认修改"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:background="#00CCC6"
+        android:layout_marginLeft="16sp"
+        android:layout_marginRight="16sp"
+        android:gravity="center"
+        android:id="@+id/btn_submit"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

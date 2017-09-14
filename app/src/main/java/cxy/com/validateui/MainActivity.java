@@ -11,14 +11,15 @@ import cxy.com.validateui.activity.CommonActivity;
 import cxy.com.validateui.activity.FragmentActivity;
 import cxy.com.validateui.activity.ReturnActivity;
 import cxy.com.validateui.activity.ShieldActivity;
+import cxy.com.validateui.activity.ShieldDemoActivity;
 
 /**
  * Created by cxy on 17-9-6.
  */
 
 public class MainActivity extends android.app.ListActivity {
-    String[] strs = new String[]{"常用注解Demo", "@Shield 屏蔽注解Demo", "两种返回接口","Fragment使用Validate"};
-    Class[] activities = new Class[]{CommonActivity.class, ShieldActivity.class,ReturnActivity.class, FragmentActivity.class};
+    String[] strs = new String[]{"常用注解Demo", "@Shield 屏蔽注解Demo", "@Shield 屏蔽项目中的使用", "两种返回接口","Fragment使用Validate"};
+    Class[] activities = new Class[]{CommonActivity.class, ShieldActivity.class,ShieldDemoActivity.class,ReturnActivity.class, FragmentActivity.class};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
