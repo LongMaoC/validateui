@@ -16,7 +16,7 @@
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_return_act.png)
 
 # 更新内容
-  * <span style="color: #FF0000;">20170914 更新内容：新增@Shield注解在项目中使用的demo</span>
+  * 20170914 ：有网友说@Shield不清楚有什么用，所以<span style="color: #FF0000;">增加一个界面ShieldDemoActivity.java</span>，展示@Shield注解在项目中实际使用
 
 # 特点
   * 不关心验证过程，只关注验证结果
