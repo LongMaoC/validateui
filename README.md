@@ -9,13 +9,20 @@
   ```
 
 
-### 部分效果图(demo在根目录下 apk/demo.apk)
+### 部分效果图(demo在根目录下 ./apk/demo.apk)
 
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_common.png)
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_shield.png)
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_return_act.png)
 
 # 更新内容
+  * 20171010 : 新增输入监听，对@Money/@MaxLength/@Password1/@Password2 注解进行修改。使用方式不变。
+
+  当在 **控件初始化后** 调用Validate.reg(this)方法，会自动给控件添加输入规则/监听事件。详细说明可以看MoneyActivity.class的注释。
+
+  当在 **控件初始化前** 调用Validate.reg(this)方法，则不会添加任何规则/监听事件
+
+
   * 20170914 ：有网友说@Shield不清楚有什么用，所以<span style="color: #FF0000;">增加一个界面ShieldDemoActivity.java</span>，展示@Shield注解在项目中实际使用
 
 # 特点

@@ -52,7 +52,6 @@ public class MoneyActivity extends AppCompatActivity {
                 });
             }
         });
-//        etMoney.setText("1.2345");
     }
 
     @Override
