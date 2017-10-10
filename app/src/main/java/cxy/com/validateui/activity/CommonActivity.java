@@ -56,10 +56,6 @@ public class CommonActivity extends AppCompatActivity {
     @Bind(R.id.et_pw2)
     EditText etPw2;
 
-    @Index(10)
-    @Money(msg = "格式不正确，请重新输入", keey = 2)
-    @Bind(R.id.et_money)
-    EditText etMoney;
 
     @Index(11)
     @RE(re = RE.only_Chinese, msg = "仅可输入中文，请重新输入")
@@ -94,8 +90,7 @@ public class CommonActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Validate.reg(this);
 
-
-        init();
+//        init();
     }
 
     private void init() {
@@ -105,7 +100,6 @@ public class CommonActivity extends AppCompatActivity {
         et_max.setText("11");
         et_min.setText("1111");
         etEmail.setText("chenxingyu1112@gmail.com");
-        etMoney.setText("10.21");
         etOnlyChinese.setText("重");
         etOnlyNumber.setText("1");
         etNumberLetterUnderline.setText("1");
@@ -156,5 +150,4 @@ public class CommonActivity extends AppCompatActivity {
                 break;
         }
     }
-
 }

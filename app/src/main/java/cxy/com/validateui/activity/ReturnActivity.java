@@ -83,7 +83,7 @@ public class ReturnActivity extends AppCompatActivity {
                 Validate.check(this, new SimpleValidateResult() {
                     @Override
                     public void onValidateSuccess() {
-                        Toast.makeText(ReturnActivity.this, "验证通过", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReturnActivity.this, "SimpleValidateResult：验证通过", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;

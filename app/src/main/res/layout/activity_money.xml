@@ -1,181 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/et_money"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:hint="金额" />
+
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="验证" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+</LinearLayout>
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ECECEC"
-                android:gravity="center_horizontal"
-                android:text="TextView验证" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_textview"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_weight="1"
-                    android:background="#D4D4D4"
-                    android:gravity="center"
-                    android:text="TextView测试" />
-
-                <Button
-                    android:id="@+id/btn_setTxt_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="赋值" />
-
-                <Button
-                    android:id="@+id/btn_clear_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="清空" />
-
-            </LinearLayout>
-
-            <!--  -->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ECECEC"
-                            android:gravity="center_horizontal"
-                            android:text="非空验证" />
-
-                        <EditText
-                            android:id="@+id/et_notnull"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:hint="非空验证" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ECECEC"
-                            android:gravity="center_horizontal"
-                            android:text="长度验证" />
-
-                        <EditText
-                            android:id="@+id/et_max"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="最大长度三的验证" />
-
-                        <EditText
-                            android:id="@+id/et_min"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="最小长度三的验证" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ECECEC"
-                            android:gravity="center_horizontal"
-                            android:text="两次密码验证" />
-
-                        <EditText
-                            android:id="@+id/et_pw1"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="密码" />
-
-                        <EditText
-                            android:id="@+id/et_pw2"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:hint="确认密码" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ECECEC"
-                            android:gravity="center_horizontal"
-                            android:text="金额验证" />
-
-                        <EditText
-                            android:id="@+id/et_money"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="小数后两位的金额验证" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ECECEC"
-                            android:gravity="center_horizontal"
-                            android:text="正则验证" />
-
-                        <EditText
-                            android:id="@+id/et_only_Chinese"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="仅中文验证" />
-
-                        <EditText
-                            android:id="@+id/et_only_number"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="仅数字验证" />
-
-                        <EditText
-                            android:id="@+id/et_number_letter_underline"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="数字、字母、下划线 验证" />
-
-                        <EditText
-                            android:id="@+id/et_email"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="email验证" />
-
-
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="验证" />
-
-    </LinearLayout>
-
-</ScrollView>

@@ -2,6 +2,9 @@ package cxy.com.validate;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +34,7 @@ import cxy.com.validate.bean.MoneyBean;
 import cxy.com.validate.bean.NotNullBean;
 import cxy.com.validate.bean.PasswordBean;
 import cxy.com.validate.bean.REBean;
+import cxy.com.validate.utils.MoneyInputFilter;
 
 /**
  * Created by CXY on 2016/11/2.
@@ -242,21 +246,40 @@ public class Validate {
                             attr.annos = new LinkedList<>();
                         }
                         editTextMap.add(attr);
+
                         if (field.isAnnotationPresent(NotNull.class))
                             attr.annos.add(validateType(field, TYPE_NOTNULL));
-
                         if (field.isAnnotationPresent(RE.class))
                             attr.annos.add(validateType(field, TYPE_RE));
-                        if (field.isAnnotationPresent(MaxLength.class))
+                        if (field.isAnnotationPresent(MaxLength.class)) {
                             attr.annos.add(validateType(field, TYPE_MAXLENGTH));
+                            if (attr.view != null && attr.isEt) {
+                                int length = field.getAnnotation(MaxLength.class).length();
+                                ((EditText) attr.view).setFilters(new InputFilter[]{new InputFilter.LengthFilter(length)});
+                            }
+                        }
                         if (field.isAnnotationPresent(MinLength.class))
                             attr.annos.add(validateType(field, TYPE_MINLENGTH));
-                        if (field.isAnnotationPresent(Money.class))
+                        if (field.isAnnotationPresent(Money.class)) {
                             attr.annos.add(validateType(field, TYPE_MONEY));
-                        if (field.isAnnotationPresent(Password1.class))
+                            int keep = field.getAnnotation(Money.class).keey();
+                            if (attr.view != null && attr.isEt) {
+                                ((EditText) attr.view).setFilters(new InputFilter[]{new MoneyInputFilter(keep)});//设置输入监听
+                                ((EditText) attr.view).setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+                            }
+                        }
+                        if (field.isAnnotationPresent(Password1.class)) {
                             attr.annos.add(validateType(field, TYPE_PASSWORD1));
-                        if (field.isAnnotationPresent(Password2.class))
+                            if (attr.view != null && attr.isEt) {
+                                ((EditText) attr.view).setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            }
+                        }
+                        if (field.isAnnotationPresent(Password2.class)) {
                             attr.annos.add(validateType(field, TYPE_PASSWORD2));
+                            if (attr.view != null && attr.isEt) {
+                                ((EditText) attr.view).setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            }
+                        }
                         if (field.isAnnotationPresent(Index.class))
                             attr.index = field.getAnnotation(Index.class).value();
                         if (field.isAnnotationPresent(Shield.class))

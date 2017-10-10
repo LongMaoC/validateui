@@ -122,20 +122,6 @@
                             android:layout_height="wrap_content"
                             android:background="#ECECEC"
                             android:gravity="center_horizontal"
-                            android:text="金额验证" />
-
-                        <EditText
-                            android:id="@+id/et_money"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="小数后两位的金额验证" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ECECEC"
-                            android:gravity="center_horizontal"
                             android:text="正则验证" />
 
                         <EditText

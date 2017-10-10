@@ -33,14 +33,16 @@ public class ValidateCore {
     }
 
     private static boolean isNull(Object view, boolean isEt, IValidateResult validateResult) {
+        if (view == null)
+            throw new NullPointerException("ValidateUI : " + (isEt ? "EditText" : "TextView") + " can not be empty!");
         if (TextUtils.isEmpty(((TextView) view).getText().toString())) {
             if (isEt) {
                 if (validateResult.onValidateErrorAnno() != null) {
                     ((EditText) view).startAnimation(validateResult.onValidateErrorAnno());
                 }
-                Log.e("ValidateUI","EditText " + msg);
+                Log.e("ValidateUI", "EditText " + msg);
             } else {
-                Log.e("ValidateUI","TextView " + msg);
+                Log.e("ValidateUI", "TextView " + msg);
             }
             return true;
         }
@@ -93,8 +95,10 @@ public class ValidateCore {
     public static boolean money(Object view, boolean isEt, MoneyBean bean, IValidateResult validateResult) {
         if (isNull(view, isEt, validateResult)) return true;
 
-        String keep = null;
-        keep = String.valueOf(bean.keep);
+        String viewText = ((TextView) view).getText().toString();
+        if (viewText.indexOf(".") == -1) return false;//money: 123
+
+        String keep = String.valueOf(bean.keep);
         if (bean.keep > 2) {
             keep = String.valueOf(2);
         }
@@ -102,9 +106,9 @@ public class ValidateCore {
             keep = String.valueOf(1);
         }
 
-        String re = "^(?!0+(?:\\.0+)?$)(?:[1-9]\\d*|0)\\.(?:\\d{" + keep + "})?$";
+        String re = "^(?!0+(?:\\.0+)?$)(?:[1-9]\\d*|0)(\\.\\d{" + keep + "})?$";
         Pattern r = Pattern.compile(re);
-        Matcher m = r.matcher(((TextView)view).getText().toString());
+        Matcher m = r.matcher(viewText);
         if (!m.matches()) {
             setEditText(view, isEt, bean.msg, validateResult);
             return true;
