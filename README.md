@@ -1,5 +1,7 @@
 # validateUI
 
+[![](https://jitpack.io/v/LongMaoC/validateui.svg)](https://jitpack.io/#LongMaoC/validateui)
+
 ## 一个表单验证的lib
 
   表单验证框架，支持对 **activity/Fragment** 内的 **TextView/EditText** 进行规则验证
