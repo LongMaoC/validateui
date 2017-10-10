@@ -5,7 +5,7 @@
   表单验证框架，支持对 **activity/Fragment** 内的 **TextView/EditText** 进行规则验证
 
   ```
-    compile 'com.github.LongMaoC:validateui:v2.2'
+    compile 'com.github.LongMaoC:validateui:v2.3'
   ```
 
 
@@ -32,6 +32,8 @@
   * 以注解的方式进行配置
 
 ## 版本
+* v2.3
+  * 对@Money/@MaxLength/@Password1/@Password2 注解进行修改，添加规则或监听。使用方式不变。
 * v2.2
   * 添加 @Shield 注解。
   * 对 Fragment 进行支持
