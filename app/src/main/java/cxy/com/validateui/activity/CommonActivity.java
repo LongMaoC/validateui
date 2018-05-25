@@ -116,9 +116,8 @@ public class CommonActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onValidateError(String msg, EditText editText) {
-                if (editText != null)
-                    editText.setFocusable(true);
+            public void onValidateError(String msg, View view) {
+                view.setFocusable(true);
                 Toast.makeText(CommonActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
 

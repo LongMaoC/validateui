@@ -7,7 +7,7 @@
   表单验证框架，支持对 **activity/Fragment** 内的 **TextView/EditText** 进行规则验证
 
   ```
-    compile 'com.github.LongMaoC:validateui:v2.3'
+    compile 'com.github.LongMaoC:validateui:v3.0'
   ```
 
 
@@ -18,12 +18,10 @@
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_return_act.png)
 
 # 更新内容
+  * 20170525 : 对bug进行修改。对接口IValidateResult的 **onValidateError** 的参数进行修改，把参数 **EditText** 变为 **View** 
   * 20171010 : 新增输入监听，对@Money/@MaxLength/@Password1/@Password2 注解进行修改。使用方式不变。
-
-  当在 **控件初始化后** 调用Validate.reg(this)方法，会自动给控件添加输入规则/监听事件。详细说明可以看MoneyActivity.class的注释。
-
-  当在 **控件初始化前** 调用Validate.reg(this)方法，则不会添加任何规则/监听事件
-
+      当在 **控件初始化后** 调用Validate.reg(this)方法，会自动给控件添加输入规则/监听事件。详细说明可以看MoneyActivity.class的注释。
+        当在 **控件初始化前** 调用Validate.reg(this)方法，则不会添加任何规则/监听事件
 
   * 20170914 ：有网友说@Shield不清楚有什么用，所以<span style="color: #FF0000;">增加一个界面ShieldDemoActivity.java</span>，展示@Shield注解在项目中实际使用
 
@@ -56,19 +54,19 @@
 
 # 功能
 
-|注解|功能|
-|:---------|:----:|
-|@Shield|屏蔽当前控件|
-|@Index|索引|
-|@MaxLength|最大长度验证|
-|@MinLength|最小长度验证|
-|@Money|金额验证|
-|@NotNull|非空验证|
-|@RE|正则验证|
-|@Password1|密码验证第一次|
-|@Password2|密码验证第二次|
-|~~@Repeat~~|~~重复类型验证~~|
-|~~@RepeatLast~~|~~重复类型验证~~|
+| 注解              |     功能     |
+| :-------------- | :--------: |
+| @Shield         |   屏蔽当前控件   |
+| @Index          |     索引     |
+| @MaxLength      |   最大长度验证   |
+| @MinLength      |   最小长度验证   |
+| @Money          |    金额验证    |
+| @NotNull        |    非空验证    |
+| @RE             |    正则验证    |
+| @Password1      |  密码验证第一次   |
+| @Password2      |  密码验证第二次   |
+| ~~@Repeat~~     | ~~重复类型验证~~ |
+| ~~@RepeatLast~~ | ~~重复类型验证~~ |
 
 
 
@@ -86,7 +84,7 @@ allprojects {
 
 app build.gradle
 ```
-  compile 'com.github.LongMaoC:validateui:v2.2'
+  compile 'com.github.LongMaoC:validateui:v3.0'
 ```
 
 ## 详细说明
@@ -158,7 +156,9 @@ Validate.reg(this);
  Validate.unreg(this);
 ```
 
-#### 在按钮的点击事件中添加 (两种回调，参考 cxy.com.validateui.activity.ReturnActivity.java ,当前示例为简单回调)
+#### 回调(两种回调，参考 cxy.com.validateui.activity.ReturnActivity.java )
+
+##### 方法1 在按钮的点击事件中添加简单回调
 ```
 public void onClick(View v ){
     Validate.check(this, new SimpleValidateResult() {
@@ -169,27 +169,50 @@ public void onClick(View v ){
     });
 }
 ```
+##### 方法2 在按钮的点击事件中添加回调
+```
+ public void buttonClick() {
+    Validate.check(CommonActivity.this, new IValidateResult() {
+        @Override
+        public void onValidateSuccess() {
+            Toast.makeText(CommonActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onValidateError(String msg, View view) {
+            view.setFocusable(true);
+            Toast.makeText(CommonActivity.this, msg, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public Animation onValidateErrorAnno() {
+            return ValidateAnimation.horizontalTranslate();
+        }
+    });
+}
+
+```
 
 
 #### 注解说明
 
 以下请参照cxy.com.validateui.activity包下的activity 以便理解
 
-| 注解 |说明|方法|
-|:--:|:--|:--|
-|@Shield|屏蔽当前属性，不进行验证，配合Validate.check(Object,boolean,IValidateResult)使用。可参考cxy.com.validateui.activity.SHieldActivity.java |-----|
-|@Index|索引 |value: 索引标记，用来标记验证的先后顺序，必须有这个注解|
-|@NotNull|非空验证|msg: 提示信息|
-|@RE| 正则验证|msg: 提示信息<br>re:正则表达式<br>RE.only_Chinese：仅中文<br>RE.only_number:仅数字<br>RE.number_letter_underline:数字、字母、下划线<br>RE.email:邮箱|
-|@MinLength|最低长度验证|msg: 提示信息<br>length:最低长度(包含)|
-|@MaxLength|最大长度验证|msg: 提示信息<br>length:最大长度(包含)|
-|@Money|金额验证|msg: 提示信息<br>keey:保留位数，范围1或2，大于范围取边界值|
-|@Password1|密码验证第一次|-----|
-|@Password2|密码验证第二次|msg:两次密码不一样时候的提示信息|
-|~~@Repeat~~|~~分组<br>Repeat: 多个edittext关联时，非最后一个~~|~~flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组~~|
-|~~@RepeatLast~~|~~分组<br>多个edittext关联时，最后一个~~|~~msg: 提示信息<br>flag:标记~~|
+|       注解        | 说明                                       | 方法                                       |
+| :-------------: | :--------------------------------------- | :--------------------------------------- |
+|     @Shield     | 屏蔽当前属性，不进行验证，配合Validate.check(Object,boolean,IValidateResult)使用。可参考cxy.com.validateui.activity.SHieldActivity.java | -----                                    |
+|     @Index      | 索引                                       | value: 索引标记，用来标记验证的先后顺序，必须有这个注解          |
+|    @NotNull     | 非空验证                                     | msg: 提示信息                                |
+|       @RE       | 正则验证                                     | msg: 提示信息<br>re:正则表达式<br>RE.only_Chinese：仅中文<br>RE.only_number:仅数字<br>RE.number_letter_underline:数字、字母、下划线<br>RE.email:邮箱 |
+|   @MinLength    | 最低长度验证                                   | msg: 提示信息<br>length:最低长度(包含)             |
+|   @MaxLength    | 最大长度验证                                   | msg: 提示信息<br>length:最大长度(包含)             |
+|     @Money      | 金额验证                                     | msg: 提示信息<br>keey:保留位数，范围1或2，大于范围取边界值    |
+|   @Password1    | 密码验证第一次                                  | -----                                    |
+|   @Password2    | 密码验证第二次                                  | msg:两次密码不一样时候的提示信息                       |
+|   ~~@Repeat~~   | ~~分组<br>Repeat: 多个edittext关联时，非最后一个~~    | ~~flag: 标记组，当一个界面的两个或多个edittext需要关联验证时，可以设置flag分组，flag值相同为一组~~ |
+| ~~@RepeatLast~~ | ~~分组<br>多个edittext关联时，最后一个~~             | ~~msg: 提示信息<br>flag:标记~~                 |
 
 
 ## -END-
-  * 邮件(chenxingyu1112@gmail.com)
+  * 邮件(chenxingyu_cxy@163.com)
   * QQ: 1209101049

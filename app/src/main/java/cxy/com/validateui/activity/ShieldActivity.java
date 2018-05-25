@@ -3,6 +3,7 @@ package cxy.com.validateui.activity;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,7 +82,7 @@ public class ShieldActivity extends AppCompatActivity {
             }
         });
 
-     init();
+        init();
     }
 
     private void init() {
@@ -106,7 +107,7 @@ public class ShieldActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onValidateError(String msg, EditText editText) {
+            public void onValidateError(String msg, View view) {
                 Toast.makeText(ShieldActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
 

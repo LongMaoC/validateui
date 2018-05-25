@@ -64,7 +64,7 @@ public class ReturnActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onValidateError(String msg, EditText editText) {
+                    public void onValidateError(String msg, View v) {
                         Toast.makeText(ReturnActivity.this, "IValidateResult:" + msg, Toast.LENGTH_SHORT).show();
                     }
 

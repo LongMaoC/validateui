@@ -113,7 +113,7 @@ public class ShieldDemoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onValidateError(String msg, EditText editText) {
+            public void onValidateError(String msg, View view) {
                 Toast.makeText(ShieldDemoActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
 

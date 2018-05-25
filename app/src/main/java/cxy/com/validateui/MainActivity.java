@@ -32,10 +32,13 @@ public class MainActivity extends android.app.ListActivity {
         super.onCreate(savedInstanceState);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, strs);
         setListAdapter(adapter);
+
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         startActivity(new Intent(this, activities[position]));
     }
+
+
 }

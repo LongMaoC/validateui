@@ -1,5 +1,6 @@
 package cxy.com.validate;
 
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.EditText;
 
@@ -9,8 +10,7 @@ import android.widget.EditText;
 public interface IValidateResult {
     void onValidateSuccess();
 
-    void onValidateError( String msg,EditText editText);
+    void onValidateError( String msg,View view);
 
     Animation onValidateErrorAnno();
-
 }

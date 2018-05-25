@@ -1,6 +1,7 @@
 package cxy.com.validateui.activity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class MoneyActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Validate.check(MoneyActivity.this, new SimpleValidateResult() {
                     @Override
                     public void onValidateSuccess() {
@@ -53,6 +55,8 @@ public class MoneyActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     protected void onDestroy() {

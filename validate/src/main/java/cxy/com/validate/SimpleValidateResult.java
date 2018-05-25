@@ -1,5 +1,6 @@
 package cxy.com.validate;
 
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,8 +12,8 @@ import android.widget.Toast;
 public abstract class SimpleValidateResult implements IValidateResult {
 
     @Override
-    public void onValidateError(String s, EditText editText) {
-        Toast.makeText(editText.getContext(),s,Toast.LENGTH_SHORT).show();
+    public void onValidateError(String s, View view) {
+        Toast.makeText(view.getContext(),s,Toast.LENGTH_SHORT).show();
     }
 
     @Override
