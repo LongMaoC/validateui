@@ -27,6 +27,7 @@ import cxy.com.validate.annotation.Password1;
 import cxy.com.validate.annotation.Password2;
 import cxy.com.validate.annotation.RE;
 import cxy.com.validate.annotation.Shield;
+import cxy.com.validate.annotation.StartsWith;
 import cxy.com.validate.bean.AttrBean;
 import cxy.com.validate.bean.Basebean;
 import cxy.com.validate.bean.LengthBean;
@@ -34,6 +35,7 @@ import cxy.com.validate.bean.MoneyBean;
 import cxy.com.validate.bean.NotNullBean;
 import cxy.com.validate.bean.PasswordBean;
 import cxy.com.validate.bean.REBean;
+import cxy.com.validate.bean.StartsWithBean;
 import cxy.com.validate.utils.MoneyInputFilter;
 
 /**
@@ -51,6 +53,8 @@ public class Validate {
     private static final String TYPE_PASSWORD1 = "PASSWORD1";
     private static final String TYPE_PASSWORD2 = "PASSWORD2";
     private static final String TYPE_SHIELD = "Shield";
+    private static final String TYPE_STARTSWITH= "StartsWith";
+
 
 
     public static void check(Object activity, IValidateResult validateResult) {
@@ -125,6 +129,10 @@ public class Validate {
                         return;
                     }
                     pwd1Attr = null;
+                }else if (TYPE_STARTSWITH.equals(bean.type)) {
+                    if (ValidateCore.startsWith(attrBean.view, attrBean.isEt, (StartsWithBean) bean, validateResult)) {
+                        return;
+                    }
                 }
             }
         }
@@ -202,6 +210,14 @@ public class Validate {
                 Basebean bean = new Basebean();
                 bean.type = TYPE_SHIELD;
                 return bean;
+            } else if (type.equals(TYPE_STARTSWITH)) {
+                StartsWith anno = field.getAnnotation(StartsWith.class);
+                StartsWithBean bean = new StartsWithBean();
+                bean.type = TYPE_STARTSWITH;
+                bean.msg = anno.msg();
+                bean.value = anno.value() ;
+                bean.ignoreCase = anno.ignoreCase() ;
+                return bean;
             }
 
             return null;
@@ -220,7 +236,8 @@ public class Validate {
                             field.isAnnotationPresent(Index.class) ||
                             field.isAnnotationPresent(Money.class) ||
                             field.isAnnotationPresent(Password1.class) ||
-                            field.isAnnotationPresent(Password2.class)
+                            field.isAnnotationPresent(Password2.class)||
+                            field.isAnnotationPresent(StartsWith.class)
                             ) {
 
                         if (!(field.getType() == EditText.class || field.getType() == TextView.class)) {
@@ -284,6 +301,8 @@ public class Validate {
                             attr.index = field.getAnnotation(Index.class).value();
                         if (field.isAnnotationPresent(Shield.class))
                             attr.annos.add(validateType(field, TYPE_SHIELD));
+                        if (field.isAnnotationPresent(StartsWith.class))
+                            attr.annos.add(validateType(field, TYPE_STARTSWITH));
                     }
                 }
             } catch (Exception e) {

@@ -1,0 +1,6 @@
+
+[squid:S3027"FPut single-quotes around '.' to use the faster "indexOf(char)" method.(—ºïê
+[squid:S1126"AReplace this if-then-else statement by a single return statement.(­¼—çüÿÿÿÿ
+usquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(²šâ¡úÿÿÿÿ
+Osquid:S1118":Add a private constructor to hide the implicit public one.(¦ùŒž
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(›æŽ«øÿÿÿÿ8ü›ã«»,

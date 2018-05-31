@@ -5,9 +5,10 @@
 ## 一个表单验证的lib
 
   表单验证框架，支持对 **activity/Fragment** 内的 **TextView/EditText** 进行规则验证
+  
 
   ```
-    compile 'com.github.LongMaoC:validateui:v3.0'
+    compile 'com.github.LongMaoC:validateui:v3.1'
   ```
 
 
@@ -18,12 +19,14 @@
 ![image](https://github.com/LongMaoC/validateui/blob/master/gif/photo_return_act.png)
 
 # 更新内容
-  * 20170525 : 对bug进行修改。对接口IValidateResult的 **onValidateError** 的参数进行修改，把参数 **EditText** 变为 **View** 
+  * 20180531 : 新增注解@StartsWith。
+  * 20180525 : 对bug进行修改。对接口IValidateResult的 **onValidateError** 的参数进行修改，把参数 **EditText** 变为 **View** 
   * 20171010 : 新增输入监听，对@Money/@MaxLength/@Password1/@Password2 注解进行修改。使用方式不变。
       当在 **控件初始化后** 调用Validate.reg(this)方法，会自动给控件添加输入规则/监听事件。详细说明可以看MoneyActivity.class的注释。
         当在 **控件初始化前** 调用Validate.reg(this)方法，则不会添加任何规则/监听事件
 
   * 20170914 ：有网友说@Shield不清楚有什么用，所以<span style="color: #FF0000;">增加一个界面ShieldDemoActivity.java</span>，展示@Shield注解在项目中实际使用
+
 
 # 特点
   * 不关心验证过程，只关注验证结果
@@ -32,6 +35,8 @@
   * 以注解的方式进行配置
 
 ## 版本
+* v3.1 新增注解@StartsWith。
+* v3.0 修复bug.对接口IValidateResult#onValidateError的参数进行修改，把参数EditText变为View
 * v2.3
   * 对@Money/@MaxLength/@Password1/@Password2 注解进行修改，添加规则或监听。使用方式不变。
 * v2.2
@@ -56,6 +61,7 @@
 
 | 注解              |     功能     |
 | :-------------- | :--------: |
+| @StartsWith     |   以固定字符串为开头，进行校验   |
 | @Shield         |   屏蔽当前控件   |
 | @Index          |     索引     |
 | @MaxLength      |   最大长度验证   |
@@ -84,7 +90,7 @@ allprojects {
 
 app build.gradle
 ```
-  compile 'com.github.LongMaoC:validateui:v3.0'
+  compile 'com.github.LongMaoC:validateui:v3.1'
 ```
 
 ## 详细说明
@@ -200,6 +206,7 @@ public void onClick(View v ){
 
 |       注解        | 说明                                       | 方法                                       |
 | :-------------: | :--------------------------------------- | :--------------------------------------- |
+|   @StartsWith    | 以固定字符串为开头，进行校验      | msg: 提示信息<br>ignoreCase:是否忽略大小写<br>value:校验开头的字符串|
 |     @Shield     | 屏蔽当前属性，不进行验证，配合Validate.check(Object,boolean,IValidateResult)使用。可参考cxy.com.validateui.activity.SHieldActivity.java | -----                                    |
 |     @Index      | 索引                                       | value: 索引标记，用来标记验证的先后顺序，必须有这个注解          |
 |    @NotNull     | 非空验证                                     | msg: 提示信息                                |

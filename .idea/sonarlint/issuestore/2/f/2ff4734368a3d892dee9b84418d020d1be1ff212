@@ -1,0 +1,17 @@
+
+lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.(ÜŠ¹µüÿÿÿÿ
+Osquid:S1118":Add a private constructor to hide the implicit public one.(°áäÝ
+Usquid:UselessImportCheck".Remove this unused import 'android.view.View'.(Ø½­äþÿÿÿÿ
+Ssquid:UselessImportCheck"1Remove this unused import 'android.app.Activity'.(‡ÊÍÆ
+Psquid:S1066"/Merge this if statement with the enclosing one.(µ£»Ñýÿÿÿÿ8¼ú¤¦»,
+Dsquid:S1481"/Remove this unused "simpleName" local variable.(×¸¾Ï
+Lsquid:S1854"8Remove this useless assignment to local variable "anno".(Ÿ†ž
+jsquid:S2068"U'PASSWORD' detected in this expression, review this potentially hardcoded credential.(‡•ÏÎ
+=squid:S1481")Remove this unused "anno" local variable.(Ÿ†ž
+Ssquid:UselessImportCheck"1Remove this unused import 'android.app.Fragment'.(ÆÅÇ°
+osquid:S2068"U'PASSWORD' detected in this expression, review this potentially hardcoded credential.(Îêæ¬øÿÿÿÿ
+nsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 69 to the 15 allowed.(“–ýþ8Â¤’¦»,
+Dsquid:S1066"/Merge this if statement with the enclosing one.(ü¨•Ý
+csquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(·ûˆŽ8Â¤’¦»,
+Ssquid:S1854">Remove this useless assignment to local variable "simpleName".(×¸¾Ï
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8Â¤’¦»,

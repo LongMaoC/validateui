@@ -14,6 +14,7 @@ import cxy.com.validate.bean.LengthBean;
 import cxy.com.validate.bean.MoneyBean;
 import cxy.com.validate.bean.PasswordBean;
 import cxy.com.validate.bean.REBean;
+import cxy.com.validate.bean.StartsWithBean;
 
 /*****************************************
  * @author cxy
@@ -131,6 +132,42 @@ public class ValidateCore {
         if (!((TextView) view.view).getText().toString().equals(((EditText) pwd1Attr.view).getText().toString())) {
             setEditText(view.view, view.isEt, bean.msg, validateResult);
             return true;
+        }
+        return false;
+    }
+
+    public static boolean startsWith(Object view, boolean isEt, StartsWithBean bean, IValidateResult validateResult) {
+        if (isNull(view, isEt, validateResult)) return true;
+
+        String viewStr = null;
+        if (isEt) {
+            viewStr = ((EditText) view).getText().toString();
+        } else {
+            viewStr = ((TextView) view).getText().toString();
+        }
+
+        if (bean.value != null) {
+
+            if (bean.value.length() > viewStr.length()) {
+                setEditText(view, isEt, bean.msg, validateResult);
+                return true;
+            }
+
+            if (bean.ignoreCase) {//忽略大小写比较
+                if (!viewStr.toUpperCase().startsWith(bean.value.toUpperCase())) {
+                    setEditText(view, isEt, bean.msg, validateResult);
+                    return true;
+                }
+            } else {
+                if (bean.value.equals("") && viewStr.length() > 0) {
+                    setEditText(view, isEt, bean.msg, validateResult);
+                    return true;
+                }
+                if (!(viewStr.substring(0, bean.value.length()).equals(bean.value))) {
+                    setEditText(view, isEt, bean.msg, validateResult);
+                    return true;
+                }
+            }
         }
         return false;
     }

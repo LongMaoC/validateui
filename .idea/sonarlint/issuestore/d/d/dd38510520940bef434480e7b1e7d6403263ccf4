@@ -1,0 +1,8 @@
+
+Qsquid:UnusedPrivateMethod")Remove this unused private "init" method.(şñÊëÿÿÿÿÿ
+N"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(ºÖ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(æ»™Şúÿÿÿÿ
+lsquid:S00116"QRename this field "et_max" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÀÓ‡Áüÿÿÿÿ
+gsquid:S00116"QRename this field "et_min" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ…ª
+`squid:UselessImportCheck">Remove this unused import 'cxy.com.validate.annotation.Money'.(Âœ¡ö
+csquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ÍöÔ
